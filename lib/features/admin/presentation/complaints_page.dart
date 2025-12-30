@@ -648,7 +648,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
                         toggleStar(complaint);
                       }),
                 Text(
-                  complaint.date.substring(0,10), // Hiển thị ngày tháng ở đây
+                  complaint.date.length >= 10 ? complaint.date.substring(0,10) : complaint.date, // Hiển thị ngày tháng ở đây
                   style: complaint.status == 'Mới'
                       ? const TextStyle(
                           fontSize: 13,
@@ -767,7 +767,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Tới: Quản lý',style: TextStyle(fontSize: 13),),
-                          Text(selectedComplaint==null?'': selectedComplaint!.date.substring(11),
+                          Text(selectedComplaint==null?'': selectedComplaint!.date.length > 11 ? selectedComplaint!.date.substring(11) : '',
                             style: TextStyle(color: const Color.fromARGB(255, 75, 75, 133)
                                         .withOpacity(0.8),
                                         fontStyle: FontStyle.italic),

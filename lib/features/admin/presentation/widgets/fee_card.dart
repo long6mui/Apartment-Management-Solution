@@ -42,12 +42,19 @@ class _FeeCardState extends State<FeeCard> {
   @override
   void initState() {
     super.initState();
-    final fields = widget.fee['fields'];
-    originalName = fields['name']['stringValue'] ?? '';
-    originalDescription = fields['description']['stringValue'] ?? '';
-    originalAmount = fields['amount']['integerValue']?.toString() ?? '0';
-    originalFrequency = fields['frequency']['stringValue'] ?? 'Hàng tháng';
-    originalDueDate = fields['dueDate']['timestampValue'] != null ? DateTime.parse(fields['dueDate']['timestampValue']).toLocal() : null;
+    final fields = widget.fee['fields'] ?? {};
+    
+    // Safely extract values with null checking
+    originalName = (fields['name'] as Map<String, dynamic>?)?['stringValue'] ?? '';
+    originalDescription = (fields['description'] as Map<String, dynamic>?)?['stringValue'] ?? '';
+    
+    final amountValue = (fields['amount'] as Map<String, dynamic>?)?['integerValue'];
+    originalAmount = amountValue?.toString() ?? '0';
+    
+    originalFrequency = (fields['frequency'] as Map<String, dynamic>?)?['stringValue'] ?? 'Hàng tháng';
+    
+    final dueDateValue = (fields['dueDate'] as Map<String, dynamic>?)?['timestampValue'];
+    originalDueDate = dueDateValue != null ? DateTime.parse(dueDateValue as String).toLocal() : null;
 
     _nameController = TextEditingController(text: originalName);
     _descriptionController = TextEditingController(text: originalDescription);

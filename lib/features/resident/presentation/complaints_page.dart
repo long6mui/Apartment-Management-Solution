@@ -684,7 +684,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
     }
 
     String getDate(String time){
-      return time.substring(0,10);
+      return time.length >= 10 ? time.substring(0,10) : time;
     }
 
     
@@ -934,7 +934,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Tới: Quản lý',style: TextStyle(fontSize: 13),),
-                          Text(selectedComplaint==null?'': selectedComplaint!.date.substring(11),
+                          Text(selectedComplaint==null?'': selectedComplaint!.date.length > 11 ? selectedComplaint!.date.substring(11) : '',
                             style: TextStyle(color: const Color.fromARGB(255, 75, 75, 133)
                                         .withOpacity(0.8),
                                         fontStyle: FontStyle.italic),
