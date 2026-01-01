@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
+import '../../../core/theme/app_theme.dart';
 
 class ResidentInfoPage extends StatefulWidget {
   final AuthenticationService authService;
@@ -125,12 +126,8 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
           body: Stack(
             children: [
               Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color.fromRGBO(161, 214, 178, 1), Color.fromRGBO(241, 243, 194, 1)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
+                decoration: BoxDecoration(
+                  gradient: AppTheme.primaryGradient,
                 ),
               ),
               Positioned(
@@ -139,10 +136,10 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                 child: Container(
                   width: 250,
                   height: 250,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 0.25), Color.fromRGBO(241, 243, 194, 0.75)],
+                      colors: [AppTheme.primaryColor.withOpacity(0.25), AppTheme.accentColor.withOpacity(0.75)],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),
@@ -155,13 +152,9 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                 child: Container(
                   width: 200,
                   height: 200,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 1), Color.fromRGBO(241, 243, 194, 1)],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
+                    gradient: AppTheme.primaryGradient,
                   ),
                 ),
               ),
@@ -171,10 +164,10 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                 child: Container(
                   width: 150,
                   height: 150,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 0.75), Color.fromRGBO(241, 243, 194, 0.25)],
+                      colors: [AppTheme.primaryColor.withOpacity(0.75), AppTheme.accentColor.withOpacity(0.25)],
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                     ),
@@ -187,10 +180,10 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                 child: Container(
                   width: 300,
                   height: 300,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 0.75), Color.fromRGBO(241, 243, 194, 0.25)],
+                      colors: [AppTheme.primaryColor.withOpacity(0.75), AppTheme.accentColor.withOpacity(0.25)],
                       begin: Alignment.topCenter,
                       end: Alignment.centerRight,
                     ),
@@ -229,11 +222,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                                   child: Container(
                                     padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      ),
+                                      gradient: AppTheme.accentGradient,
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: const Align(
@@ -294,9 +283,9 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'THÔNG TIN CƯ DÂN',
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.green),
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.primaryColor),
           ),
           const SizedBox(height: 24),
           TextFormField(
@@ -430,7 +419,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
           const SizedBox(height: 24),
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(gradient: const LinearGradient(colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)]), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(8)),
             child: ElevatedButton(
               onPressed: submitInfo,
               style: ElevatedButton.styleFrom(
@@ -449,7 +438,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)]),
+              gradient: AppTheme.accentGradient,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
@@ -463,7 +452,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                   ),
-                  child: const Text('Quay lại Đăng Nhập', style: TextStyle(fontSize: 18, color: Colors.green)),
+                  child: Text('Quay lại Đăng Nhập', style: TextStyle(fontSize: 18, color: AppTheme.primaryColor)),
                 ),
               ),
             ),

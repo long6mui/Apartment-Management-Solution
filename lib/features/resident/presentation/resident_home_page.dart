@@ -66,7 +66,11 @@ class _ResidentHomePageState extends State<ResidentHomePage> {
           projectId: widget.authService.projectId, // Đảm bảo authService có projectId
         ),
       ), // 0: Hồ sơ nhân khẩu
-      const FeesPage(), // 1: Phí thanh toán
+      FeesPage(
+        authService: widget.authService,
+        uid: widget.uid,
+        idToken: widget.idToken,
+      ), // 1: Phí thanh toán
       EventsPage(
         authService: widget.authService,
       ), // 2: Sự kiện

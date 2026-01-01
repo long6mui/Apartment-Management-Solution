@@ -8,6 +8,7 @@ import '../../resident/presentation/resident_home_page.dart';
 import '../../guest/presentation/guest_home_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../../core/theme/app_theme.dart';
 
 class LoginPage extends StatefulWidget {
   final AuthenticationService authService;
@@ -241,26 +242,22 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color.fromRGBO(161, 214, 178, 1), Color.fromRGBO(241, 243, 194, 1)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+                  colors: [AppTheme.primaryColor, AppTheme.accentColor2],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
               ),
             ),
-            // Thêm nhiều bong bóng nền hơn
+            // Decorative circles
             Positioned(
               top: -50,
               left: -50,
               child: Container(
-                width: 250, // đường kính của bubble
+                width: 250,
                 height: 250,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [Color.fromRGBO(161, 214, 178, 0.25), Color.fromRGBO(241, 243, 194, 0.75)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+                  color: AppTheme.accentColor.withOpacity(0.15),
                 ),
               ),
             ),
@@ -268,15 +265,11 @@ class _LoginPageState extends State<LoginPage> {
               bottom: -100,
               right: -50,
               child: Container(
-                width: 200, // đường kính của bubble
+                width: 200,
                 height: 200,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [Color.fromRGBO(161, 214, 178, 1), Color.fromRGBO(241, 243, 194, 1)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
+                  color: AppTheme.accentColor.withOpacity(0.1),
                 ),
               ),
             ),
@@ -284,31 +277,11 @@ class _LoginPageState extends State<LoginPage> {
               top: 120,
               right: 50,
               child: Container(
-                width: 150, // đường kính của bubble
+                width: 150,
                 height: 150,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [Color.fromRGBO(161, 214, 178, 0.75), Color.fromRGBO(241, 243, 194, 0.25)],
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 100,
-              right: 500,
-              child: Container(
-                width: 300, // đường kính của bubble
-                height: 300,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [Color.fromRGBO(161, 214, 178, 0.75), Color.fromRGBO(241, 243, 194, 0.25)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.centerRight,
-                  ),
+                  color: AppTheme.accentColor.withOpacity(0.2),
                 ),
               ),
             ),
@@ -317,16 +290,16 @@ class _LoginPageState extends State<LoginPage> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Container(
-                  width: isMobile ? double.infinity : 800, // Độ rộng tùy theo thiết bị
+                  width: isMobile ? double.infinity : 800,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: AppTheme.surfaceColor.withOpacity(0.95),
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
+                        color: AppTheme.primaryColor.withOpacity(0.2),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
                       ),
                     ],
                   ),
@@ -347,11 +320,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Container(
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                    ),
+                                    gradient: AppTheme.primaryGradient,
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: const Align(
@@ -397,7 +366,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                     decoration: BoxDecoration(
-                      color: message!.contains('thành công') ? Colors.green : Colors.red,
+                      color: message!.contains('thành công') ? AppTheme.successColor : AppTheme.dangerColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -436,7 +405,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: Colors.green,
+              color: AppTheme.primaryColor,
             ),
           ),
           const SizedBox(height: 24),
@@ -493,7 +462,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text(
                 'Quên mật khẩu?',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 119, 198, 122),
+                  color: AppTheme.primaryColor,
                 ),
               ),
             ),
@@ -503,16 +472,14 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-              ),
+              gradient: AppTheme.primaryGradient,
               borderRadius: BorderRadius.circular(8),
             ),
             child: ElevatedButton(
               onPressed: handleLogin,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent, // Nền trong suốt
-                shadowColor: Colors.transparent, // Không bóng đổ
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -532,34 +499,23 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-              ),
+              border: Border.all(color: AppTheme.primaryColor, width: 2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0), // Độ dày viền
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white, // Nền trắng
-                  borderRadius: BorderRadius.circular(6), // Bán kính góc nhỏ hơn để tạo hiệu ứng viền
+            child: TextButton(
+              onPressed: navigateToRegister,
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
                 ),
-                child: TextButton(
-                  onPressed: navigateToRegister,
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.white, // Nền trắng
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                  ),
-                  child: const Text(
-                    'Đăng Ký',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.green, // Chữ màu xanh lá
-                    ),
-                  ),
+              ),
+              child: const Text(
+                'Đăng Ký',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: AppTheme.primaryColor,
                 ),
               ),
             ),

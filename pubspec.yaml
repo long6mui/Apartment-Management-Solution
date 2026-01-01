@@ -44,4 +44,5 @@ flutter:
   assets:
     - assets/langs/en.json
     - assets/langs/vi.json
-    - assets/bgimage/complaintbg.jpg
+    - assets/bgimage/
+    - assets/QR/

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../data/auth_service.dart';
 import 'login_page.dart';
-import 'package:intl/intl.dart'; // Thêm thư viện để định dạng ngày tháng
+import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
+import '../../../core/theme/app_theme.dart';
 
 class GuestInfoPage extends StatefulWidget {
   final AuthenticationService authService;
@@ -33,6 +34,8 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController idController = TextEditingController();
   final TextEditingController jobTitleController = TextEditingController();
+  final TextEditingController floorController = TextEditingController();
+  final TextEditingController apartmentNumberController = TextEditingController();
 
   bool isLoading = false;
   String? message;
@@ -59,6 +62,8 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
     String phone = phoneController.text.trim();
     String id = idController.text.trim();
     String jobTitle = jobTitleController.text.trim();
+    String floor = floorController.text.trim();
+    String apartmentNumber = apartmentNumberController.text.trim();
 
     // Tạo dữ liệu để gửi lên queue
     Map<String, dynamic> queueData = {
@@ -68,6 +73,8 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
       'phone': phone,
       'id': id,
       'jobTitle': jobTitle,
+      'floor': int.parse(floor),
+      'apartmentNumber': int.parse(apartmentNumber),
       'email': widget.email,
       'password': widget.password, // Thêm trường password
       'role': 'Khách',
@@ -137,12 +144,8 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
             children: [
               // Nền gradient toàn màn hình
               Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color.fromRGBO(161, 214, 178, 1), Color.fromRGBO(241, 243, 194, 1)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
+                decoration: BoxDecoration(
+                  gradient: AppTheme.primaryGradient,
                 ),
               ),
               // Thêm nhiều bong bóng nền hơn
@@ -150,12 +153,12 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
                 top: -50,
                 left: -50,
                 child: Container(
-                  width: 250, // đường kính của bubble
+                  width: 250,
                   height: 250,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 0.25), Color.fromRGBO(241, 243, 194, 0.75)],
+                      colors: [AppTheme.primaryColor.withOpacity(0.25), AppTheme.accentColor.withOpacity(0.75)],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),
@@ -166,15 +169,11 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
                 bottom: -100,
                 right: -50,
                 child: Container(
-                  width: 200, // đường kính của bubble
+                  width: 200,
                   height: 200,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 1), Color.fromRGBO(241, 243, 194, 1)],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
+                    gradient: AppTheme.primaryGradient,
                   ),
                 ),
               ),
@@ -182,12 +181,12 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
                 top: 120,
                 right: 50,
                 child: Container(
-                  width: 150, // đường kính của bubble
+                  width: 150,
                   height: 150,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 0.75), Color.fromRGBO(241, 243, 194, 0.25)],
+                      colors: [AppTheme.primaryColor.withOpacity(0.75), AppTheme.accentColor.withOpacity(0.25)],
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                     ),
@@ -198,12 +197,12 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
                 bottom: 100,
                 right: 500,
                 child: Container(
-                  width: 300, // đường kính của bubble
+                  width: 300,
                   height: 300,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color.fromRGBO(161, 214, 178, 0.75), Color.fromRGBO(241, 243, 194, 0.25)],
+                      colors: [AppTheme.primaryColor.withOpacity(0.75), AppTheme.accentColor.withOpacity(0.25)],
                       begin: Alignment.topCenter,
                       end: Alignment.centerRight,
                     ),
@@ -245,15 +244,11 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
                                   child: Container(
                                     padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      ),
+                                      gradient: AppTheme.accentGradient,
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: const Align(
-                                      alignment: Alignment.center, // Căn lề trái
+                                      alignment: Alignment.center,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,12 +324,12 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'THÔNG TIN KHÁCH',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Colors.green,
+              color: AppTheme.primaryColor,
             ),
           ),
           const SizedBox(height: 24),
@@ -466,6 +461,48 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
               return null;
             },
           ),
+          const SizedBox(height: 16),
+          // Tầng
+          TextFormField(
+            controller: floorController,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.layers),
+              labelText: 'Tầng',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) return 'Vui lòng nhập tầng.';
+              final floor = int.tryParse(value);
+              if (floor == null || floor < 1 || floor > 10) {
+                return 'Tầng phải là số từ 1 đến 10.';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 16),
+          // Số căn hộ
+          TextFormField(
+            controller: apartmentNumberController,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.home),
+              labelText: 'Số căn hộ',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) return 'Vui lòng nhập số căn hộ.';
+              final apartment = int.tryParse(value);
+              if (apartment == null || apartment < 1 || apartment > 20) {
+                return 'Số căn hộ phải là số từ 1 đến 20.';
+              }
+              return null;
+            },
+          ),
           const SizedBox(height: 12),
           // Thông báo
           if (message != null)
@@ -478,16 +515,14 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-              ),
+              gradient: AppTheme.accentGradient,
               borderRadius: BorderRadius.circular(8),
             ),
             child: ElevatedButton(
               onPressed: submitInfo,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent, // Nền trong suốt
-                shadowColor: Colors.transparent, // Không bóng đổ
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -497,7 +532,7 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
                 'Gửi Thông Tin',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.white, // Chữ màu trắng
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -507,32 +542,30 @@ class _GuestInfoPageState extends State<GuestInfoPage> {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color.fromARGB(255, 119, 198, 122), Color.fromARGB(255, 252, 242, 150)],
-              ),
+              gradient: AppTheme.accentGradient,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(2.0), // Độ dày viền
+              padding: const EdgeInsets.all(2.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Nền trắng
-                  borderRadius: BorderRadius.circular(6), // Bán kính góc nhỏ hơn để tạo hiệu ứng viền
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 child: TextButton(
-                  onPressed: logout, // Quay lại trang đăng nhập
+                  onPressed: logout,
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.white, // Nền trắng
+                    backgroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Quay lại Đăng Nhập',
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.green, // Chữ màu xanh lá
+                      color: AppTheme.primaryColor,
                     ),
                   ),
                 ),

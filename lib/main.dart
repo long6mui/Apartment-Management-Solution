@@ -3,6 +3,7 @@ import 'features/.authentication/data/auth_service.dart';
 import 'features/.authentication/presentation/login_page.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'firebase_options.dart';
+import 'core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,13 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       locale: const Locale('vi', 'VN'),
       title: 'Quản Lý Chung Cư',
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        scaffoldBackgroundColor: Colors.white, // Màu nền cho các trang
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white, // Màu nền của AppBar
-        ),
-      ),
+      theme: AppTheme.lightTheme,
       // Trang mở đầu của ứng dụng là trang đăng nhập
       home: LoginPage(authService: authService),
       debugShowCheckedModeBanner: false,
